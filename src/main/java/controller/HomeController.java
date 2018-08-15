@@ -13,7 +13,7 @@ public class HomeController {
     @RequestMapping("/index")
     public  String index(){
         logger.info("the first jsp pages");
-        return "index";
+        return "home/index";
     }
 
 }
