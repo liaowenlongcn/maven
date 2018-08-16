@@ -1,9 +1,13 @@
 package controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pojo.beans.User;
+import pojo.bean.User;
+import pojo.vo.UserVo;
+import service.UserService;
+import service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +15,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/list")
     public ModelAndView list(){
         List<User> list= new ArrayList<User>();
@@ -39,4 +47,12 @@ public class UserController {
         return modelAndView;
     }
 
+    @RequestMapping("/findList")
+    public ModelAndView findList() throws Exception {
+        List<UserVo> list=  userService.findList(null);
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("list",list);
+        modelAndView.setViewName("user/list");
+        return modelAndView;
+    }
 }
