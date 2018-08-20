@@ -11,5 +11,9 @@ import java.util.List;
 public interface UserMapper {
     //查询列表
     public List<UserVo> findList(UserBo userBo) throws Exception;
+    //查询实体
+    public UserVo get(int id) throws Exception;
+    //更新实体
+    public void update(int id,UserBo userBo) throws Exception;
 
 }

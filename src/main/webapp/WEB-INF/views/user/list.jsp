@@ -18,6 +18,7 @@
             <td>${item.name}</td>
             <td>${item.sex}</td>
             <td>${item.age}</td>
+            <td><a href="${pageContext.request.contextPath}/user/edit?id=${item.id}">修改</a></td>
         </tr>
     </c:forEach>
 </table>

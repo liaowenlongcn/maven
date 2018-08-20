@@ -8,9 +8,7 @@ import pojo.vo.UserVo;
 
 import java.util.List;
 
-/**
- * Created by wenlong.liao on 2018/8/16.
- */
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,5 +17,13 @@ public class UserServiceImpl implements UserService {
 
     public List<UserVo> findList(UserBo userBo) throws Exception {
         return userMapper.findList(userBo);
+    }
+
+    public UserVo get(int id) throws Exception {
+        return userMapper.get(id);
+    }
+
+    public void update(int id, UserBo userBo) throws Exception {
+         userMapper.update(id,userBo);
     }
 }

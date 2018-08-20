@@ -3,6 +3,7 @@ package controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pojo.bean.User;
 import pojo.vo.UserVo;
@@ -54,5 +55,20 @@ public class UserController {
         modelAndView.addObject("list",list);
         modelAndView.setViewName("user/list");
         return modelAndView;
+    }
+
+    @RequestMapping("/edit")
+    public ModelAndView edit() throws Exception {
+        UserVo userVo=  userService.get(1);
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("user",userVo);
+        modelAndView.setViewName("user/edit");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/save",method ={RequestMethod.POST})
+    public String save() throws Exception {
+        //userService.update(1,null);
+         return "redirect:findList";
     }
 }

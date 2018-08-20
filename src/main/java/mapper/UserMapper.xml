@@ -11,6 +11,7 @@
       </if>
     </sql>
 
+
     <select id="findList"
             parameterType="pojo.bo.UserBo"
             resultType="pojo.vo.UserVo">
@@ -19,4 +20,15 @@
               <include refid="findList_where"></include>
           </where>
     </select>
+
+    <select id="get"
+            parameterType="int"
+            resultType="pojo.vo.UserVo">
+        SELECT * FROM USER WHERE Id=#{id}
+    </select>
+
+    <update id="update" keyProperty="id">
+        update users set name=#{name},age=#{age},sex=#{sex} where id=#{id}
+    </update>
+
 </mapper>
