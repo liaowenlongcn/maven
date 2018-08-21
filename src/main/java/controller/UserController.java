@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import pojo.bean.User;
+import pojo.bo.UserBo;
 import pojo.vo.UserVo;
 import service.UserService;
 import service.UserServiceImpl;
@@ -58,8 +59,8 @@ public class UserController {
     }
 
     @RequestMapping("/edit")
-    public ModelAndView edit() throws Exception {
-        UserVo userVo=  userService.get(1);
+    public ModelAndView edit(Integer id) throws Exception {
+        UserVo userVo=  userService.get(id);
         ModelAndView modelAndView=new ModelAndView();
         modelAndView.addObject("user",userVo);
         modelAndView.setViewName("user/edit");
@@ -67,8 +68,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save",method ={RequestMethod.POST})
-    public String save() throws Exception {
-        //userService.update(1,null);
+    public String save(UserBo userBo) throws Exception {
+        userService.update(userBo.getId(),userBo);
          return "redirect:findList";
     }
 }

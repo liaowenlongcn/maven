@@ -27,8 +27,8 @@
         SELECT * FROM USER WHERE Id=#{id}
     </select>
 
-    <update id="update" keyProperty="id">
-        update users set name=#{name},age=#{age},sex=#{sex} where id=#{id}
+    <update id="update" parameterType="pojo.bo.UserBo">
+        update user set name=#{userBo.name},age=#{userBo.age},sex=#{userBo.sex} where id=#{userBo.id}
     </update>
 
 </mapper>

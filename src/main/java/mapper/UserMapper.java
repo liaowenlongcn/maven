@@ -1,5 +1,6 @@
 package mapper;
 
+import org.apache.ibatis.annotations.Param;
 import pojo.bo.UserBo;
 import pojo.vo.UserVo;
 
@@ -14,6 +15,6 @@ public interface UserMapper {
     //查询实体
     public UserVo get(int id) throws Exception;
     //更新实体
-    public void update(int id,UserBo userBo) throws Exception;
+    public void update(int id,@Param("userBo") UserBo userBo) throws Exception;
 
 }
