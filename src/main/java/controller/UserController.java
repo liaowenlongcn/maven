@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.ModelAndView;
 import pojo.bean.User;
 import pojo.bo.UserBo;
@@ -11,8 +13,10 @@ import pojo.vo.UserVo;
 import service.UserService;
 import service.UserServiceImpl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -68,8 +72,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/save",method ={RequestMethod.POST})
-    public String save(UserBo userBo) throws Exception {
+    public String save(UserBo userBo, MultipartFile imageFile) throws Exception {
+        if(imageFile!=null){
+            String originalFilename=imageFile.getOriginalFilename();
+            String imagePath="D:\\Download\\images\\";
+            if(originalFilename!=null&&originalFilename.length()>0){
+                String newFilename= UUID.randomUUID()+originalFilename.substring(originalFilename.lastIndexOf('.'));
+                File newFile=new File(imagePath+newFilename);
+                imageFile.transferTo(newFile);
+                userBo.setImg(newFilename);
+            }
+        }
+
         userService.update(userBo.getId(),userBo);
-         return "redirect:findList";
+        return "redirect:findList";
     }
 }

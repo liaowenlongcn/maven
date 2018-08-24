@@ -9,7 +9,7 @@
                         http://www.springframework.org/schema/context/spring-context-3.2.xsd
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <!--启用spring的一些annotation -->
+    <!--启用spring的一些annotation-->
     <context:annotation-config/>
 
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
@@ -48,13 +48,5 @@
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="resolveLazily" value="true"/>
     </bean>
-
-
-
-
-
-
-
-
 
 </beans>

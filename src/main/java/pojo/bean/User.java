@@ -8,6 +8,7 @@ public class User {
     public String name;
     public Boolean sex;
     public Integer age;
+    public String img;
 
     public Integer getId() {
         return id;
@@ -41,4 +42,11 @@ public class User {
         this.age = age;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
