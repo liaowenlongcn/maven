@@ -9,12 +9,12 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <!--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />-->
-    <link rel="stylesheet" href="/plug/x-admin/css/font.css">
-    <link rel="stylesheet" href="/plug/x-admin/css/xadmin.css">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/plug/x-admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script src="/plug/x-admin/js/xadmin.js"></script>
-    <script src="/js/common.js"></script>
+    <link rel="stylesheet" href="plug/x-admin/css/font.css">
+    <link rel="stylesheet" href="plug/x-admin/css/xadmin.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="plug/x-admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="plug/x-admin/js/xadmin.js"></script>
 
 </head>
 <body class="login-bg">
@@ -39,7 +39,7 @@
             var form = layui.form;
             form.on('submit(login)', function(data){
                 Ajax({
-                    api:"/user/login",
+                    api:"user/login",
                     data:data.field,
                     callback_success:function (res) {
                       //location.href='index.html';

@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="stylesheet" href="/plug/x-admin/css/font.css">
-    <link rel="stylesheet" href="/plug/x-admin/css/xadmin.css">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/plug/x-admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script src="/plug/x-admin/js/xadmin.js"></script>
-    <script src="/js/common.js"></script>
+    <link rel="stylesheet" href="plug/x-admin/css/font.css">
+    <link rel="stylesheet" href="plug/x-admin/css/xadmin.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="plug/x-admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="plug/x-admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -88,7 +88,7 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="admin-list.html">
+                        <a _href="page?viewName=user/list">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>管理员列表</cite>
                         </a>
@@ -127,7 +127,7 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/page?viewName=home/home' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='page?viewName=home/home' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
     </div>

@@ -6,12 +6,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="stylesheet" href="/plug/x-admin/css/font.css">
-    <link rel="stylesheet" href="/plug/x-admin/css/xadmin.css">
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/plug/x-admin/lib/layui/layui.js" charset="utf-8"></script>
-    <script src="/plug/x-admin/js/xadmin.js"></script>
-    <script src="/js/common.js"></script>
+    <link rel="stylesheet" href="plug/x-admin/css/font.css">
+    <link rel="stylesheet" href="plug/x-admin/css/xadmin.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="plug/x-admin/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="plug/x-admin/js/xadmin.js"></script>
 </head>
 <body>
 <div class="x-body layui-anim layui-anim-up">

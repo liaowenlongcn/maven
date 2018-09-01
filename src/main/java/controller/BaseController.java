@@ -41,7 +41,7 @@ public class BaseController {
 
     @RequestMapping("/main")
     public ModelAndView Redirect(){
-        return Redirect("/home/index");
+        return Redirect("home/index");
     }
 
 }

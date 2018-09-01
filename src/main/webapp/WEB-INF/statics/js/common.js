@@ -38,7 +38,7 @@ function Ajax(params) {
 
 function Redirect(url) {
     if(url.length==0)
-        location.href='/main';
+        location.href='main';
     else
-        location.href='/page?viewName='+encodeURIComponent(url);
+        location.href='page?viewName='+encodeURIComponent(url);
 }
