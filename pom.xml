@@ -10,7 +10,7 @@
   <artifactId>maven</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>maven Maven Webapp</name>
+  <username>maven Maven Webapp</username>
   <url>http://www.example.com</url>
 
   <properties>

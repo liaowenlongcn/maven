@@ -7,16 +7,16 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/user/save" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="${user.id}">
+    <input type="hidden" username="id" value="${user.id}">
     <table>
         <tr>
-            <td>姓名：</td><td><input type="text" name="name" value="${user.name}"></td>
+            <td>姓名：</td><td><input type="text" username="username" value="${user.username}"></td>
         </tr>
         <tr>
-            <td>性别：</td><td><input type="text" name="sex" value="${user.sex}"></td>
+            <td>性别：</td><td><input type="text" username="sex" value="${user.sex}"></td>
         </tr>
         <tr>
-            <td>年龄：</td><td><input type="text" name="age" value="${user.age}"></td>
+            <td>年龄：</td><td><input type="text" username="age" value="${user.age}"></td>
         </tr>
         </tr>
         <tr>
@@ -24,10 +24,10 @@
             <td>
                 <c:if test="${user.img!=null}">
                     <img src="/images/${user.img}" width="100" height="100" >
-                    <input type="hidden" name="img" value="${user.img}">
+                    <input type="hidden" username="img" value="${user.img}">
                     <br/>
                 </c:if>
-                <input type="file" name="imageFile"  >
+                <input type="file" username="imageFile"  >
             </td>
         </tr>
         <tr>

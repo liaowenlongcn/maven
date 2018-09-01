@@ -5,7 +5,8 @@ package pojo.bean;
  */
 public class User {
     public  Integer id;
-    public String name;
+    public String username;
+    public String password;
     public Boolean sex;
     public Integer age;
     public String img;
@@ -18,12 +19,20 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Boolean getSex() {

@@ -6,11 +6,19 @@
 
 
     <sql id="findList_where">
-      <if test="name!=null and name!=''">
-          NAME LIKE '%${name}%'
+      <if test="username!=null and username!=''">
+          USERNAME LIKE '%${username}%'
       </if>
     </sql>
 
+    <select id="login"
+            parameterType="pojo.bo.user.LoginBo"
+            resultType="pojo.vo.UserVo">
+        SELECT * FROM USER
+        <where>
+            USERNAME =#{username} AND  PASSWORD=#{password}
+        </where>
+    </select>
 
     <select id="findList"
             parameterType="pojo.bo.UserBo"
@@ -28,7 +36,7 @@
     </select>
 
     <update id="update" parameterType="pojo.bo.UserBo">
-        update user set name=#{userBo.name},age=#{userBo.age},sex=#{userBo.sex},img=#{userBo.img}
+        update user set username=#{userBo.username},age=#{userBo.age},sex=#{userBo.sex},img=#{userBo.img}
         where id=#{userBo.id}
     </update>
 

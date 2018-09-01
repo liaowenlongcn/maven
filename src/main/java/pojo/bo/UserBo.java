@@ -5,7 +5,7 @@ package pojo.bo;
  */
 public class UserBo {
     public  Integer id;
-    public String name;
+    public String username;
     public Boolean sex;
     public Integer age;
     public String img;
@@ -18,12 +18,12 @@ public class UserBo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Boolean getSex() {

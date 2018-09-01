@@ -16,10 +16,10 @@
 
 <!--
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="jdbcUrl" value="${jdbc.url}"></property>
-        <property name="driverClass" value="${jdbc.driver}"></property>
-        <property name="user" value="${jdbc.username}"></property>
-        <property name="password" value="${jdbc.password}"></property>
+        <property username="jdbcUrl" value="${jdbc.url}"></property>
+        <property username="driverClass" value="${jdbc.driver}"></property>
+        <property username="user" value="${jdbc.username}"></property>
+        <property username="password" value="${jdbc.password}"></property>
     </bean> -->
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
