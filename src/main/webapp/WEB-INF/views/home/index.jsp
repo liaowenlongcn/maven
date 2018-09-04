@@ -127,7 +127,7 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='page?viewName=home/home' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='page?viewName=user/list' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
     </div>
@@ -135,7 +135,7 @@
 <div class="page-content-bg"></div>
 <!-- 右侧主体结束 -->
 <!-- 中部结束 -->
-<!-- 底部开始 -->
+<!-- 底部开始-->
 <div class="footer">
     <div class="copyright">Copyright ©2018 ssm-admin v1.0.1 All Rights Reserved</div>
 </div>

@@ -25,7 +25,7 @@ function Ajax(params) {
                 layer.msg(res.message);
                 return;
             }
-            callback_success(res.Body);
+            callback_success(res.body);
         },
         error: function (req, msg, ex) {
             layer.msg("请求异常，请稍后重试！");
@@ -42,3 +42,4 @@ function Redirect(url) {
     else
         location.href='page?viewName='+encodeURIComponent(url);
 }
+

@@ -14,7 +14,7 @@
     <select id="login"
             parameterType="pojo.bo.user.LoginBo"
             resultType="pojo.vo.UserVo">
-        SELECT * FROM USER
+        SELECT * FROM sys_user
         <where>
             USERNAME =#{username} AND  PASSWORD=#{password}
         </where>
@@ -23,7 +23,7 @@
     <select id="findList"
             parameterType="pojo.bo.UserBo"
             resultType="pojo.vo.UserVo">
-          SELECT * FROM USER
+          SELECT * FROM sys_user
           <where>
               <include refid="findList_where"></include>
           </where>
@@ -32,11 +32,11 @@
     <select id="get"
             parameterType="int"
             resultType="pojo.vo.UserVo">
-        SELECT * FROM USER WHERE Id=#{id}
+        SELECT * FROM sys_user WHERE Id=#{id}
     </select>
 
     <update id="update" parameterType="pojo.bo.UserBo">
-        update user set username=#{userBo.username},age=#{userBo.age},sex=#{userBo.sex},img=#{userBo.img}
+        update sys_user set username=#{userBo.username},age=#{userBo.age},sex=#{userBo.sex},img=#{userBo.img}
         where id=#{userBo.id}
     </update>
 

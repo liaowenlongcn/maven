@@ -20,7 +20,7 @@ public class CommonRespnse<T> {
     }
 
     public void setSuccess(boolean success) {
-        isSuccess = resultCode ==ResultCode.Success.getValue()? true:false;
+        this.isSuccess = success;
     }
 
     public Integer getResultCode() {

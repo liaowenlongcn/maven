@@ -14,8 +14,10 @@ import pojo.bean.User;
 import pojo.bo.UserBo;
 import pojo.bo.user.LoginBo;
 import pojo.enums.ResultCode;
+import pojo.request.GetListRequest;
 import pojo.request.user.LoginRequest;
 import pojo.response.CommonRespnse;
+import pojo.vo.BaseListVO;
 import pojo.vo.UserVo;
 import service.UserService;
 import service.UserServiceImpl;
@@ -33,54 +35,58 @@ public class UserController extends BaseController {
     private UserService userService;
 
     //用户登录
-    @RequestMapping(value = "/login",method ={RequestMethod.POST})
-    public @ResponseBody CommonRespnse<UserVo> login(LoginRequest request) throws Exception {
-        LoginBo bo=new LoginBo();
-        ObjectHelper.toBean(request,bo);
-        UserVo vo=userService.login(bo);
-        if(vo==null||vo.getId()==null) return CallBack(ResultCode.Failure,"用户名或密码错误！");
+    @RequestMapping(value = "/login", method = {RequestMethod.POST})
+    @ResponseBody
+    public CommonRespnse<UserVo> login(LoginRequest request) throws Exception {
+        LoginBo bo = new LoginBo();
+        ObjectHelper.toBean(request, bo);
+        UserVo vo = userService.login(bo);
+        if (vo == null || vo.getId() == null) return CallBack(ResultCode.Failure, "用户名或密码错误！");
         return CallBack(vo);
     }
 
-
-    @RequestMapping("/findList")
-    public ModelAndView findList() throws Exception {
-        List<UserVo> list=  userService.findList(null);
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("list",list);
-        modelAndView.setViewName("user/list");
-        return modelAndView;
+    //获取列表
+    @RequestMapping("/getList")
+    @ResponseBody
+    public BaseListVO<UserVo> getList() throws Exception {
+        BaseListVO<UserVo> listVo = new BaseListVO<UserVo>();
+        List<UserVo> list = userService.findList(null);
+        listVo.setData(list);
+        listVo.setCount(1000);
+        return listVo;
     }
 
     @RequestMapping("/edit")
     public ModelAndView edit(Integer id) throws Exception {
-        UserVo userVo=  userService.get(id);
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("user",userVo);
+        UserVo userVo = userService.get(id);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", userVo);
         modelAndView.setViewName("user/edit");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/save",method ={RequestMethod.POST})
+    @RequestMapping(value = "/save", method = {RequestMethod.POST})
     public String save(UserBo userBo, MultipartFile imageFile) throws Exception {
-        if(imageFile!=null){
-            String originalFilename=imageFile.getOriginalFilename();
-            String imagePath="D:\\Download\\images\\";
-            if(originalFilename!=null&&originalFilename.length()>0){
-                String newFilename= UUID.randomUUID()+originalFilename.substring(originalFilename.lastIndexOf('.'));
-                File newFile=new File(imagePath+newFilename);
+        if (imageFile != null) {
+            String originalFilename = imageFile.getOriginalFilename();
+            String imagePath = "D:\\Download\\images\\";
+            if (originalFilename != null && originalFilename.length() > 0) {
+                String newFilename = UUID.randomUUID() + originalFilename.substring(originalFilename.lastIndexOf('.'));
+                File newFile = new File(imagePath + newFilename);
                 imageFile.transferTo(newFile);
                 userBo.setImg(newFilename);
             }
         }
 
-        userService.update(userBo.getId(),userBo);
+        userService.update(userBo.getId(), userBo);
         return "redirect:findList";
     }
 
     @RequestMapping("/getUserById")
-    public  @ResponseBody UserVo getUserById(Integer id) throws Exception {
-        UserVo userVo=  userService.get(id);
+    public
+    @ResponseBody
+    UserVo getUserById(Integer id) throws Exception {
+        UserVo userVo = userService.get(id);
         return userVo;
     }
 }

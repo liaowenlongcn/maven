@@ -26,6 +26,7 @@ public class BaseController {
 
     protected <T> CommonRespnse<T> CallBack(ResultCode code,String message, T body)  {
         CommonRespnse<T> respnse=new CommonRespnse<T>();
+        respnse.setSuccess(true);
         respnse.setResultCode(code);
         respnse.setMessage(message);
         respnse.setBody(body);

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PageMapper">
+    <select id="getColumns" parameterType="java.lang.Integer" resultType="java.util.Map">
+         SELECT * FROM page_field WHERE pageid=#{pageId}
+    </select>
+
+    <select id="getList" parameterType="pojo.bo.GetListBo" resultType="java.util.Map">
+        SELECT GROUP_CONCAT(NAME) INTO @FIELDS FROM (SELECT 'field' FIELDS, NAME FROM page_field) temp GROUP BY FIELDS;
+        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user ' );
+        PREPARE strSql FROM @SQL;
+        EXECUTE strSql;
+        DEALLOCATE PREPARE strSql;
+    </select>
+</mapper>
