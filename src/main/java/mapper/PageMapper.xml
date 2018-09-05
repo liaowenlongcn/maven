@@ -9,9 +9,14 @@
 
     <select id="getList" parameterType="pojo.bo.GetListBo" resultType="java.util.Map">
         SELECT GROUP_CONCAT(NAME) INTO @FIELDS FROM (SELECT 'field' FIELDS, NAME FROM page_field) temp GROUP BY FIELDS;
-        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user ' );
+        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user limit ',(#{page}-1)*#{limit},',',#{limit} );
         PREPARE strSql FROM @SQL;
         EXECUTE strSql;
         DEALLOCATE PREPARE strSql;
     </select>
+
+    <select id="getListCount" parameterType="pojo.bo.GetListBo" resultType="Integer">
+        select count(*) from  sys_user
+    </select>
+
 </mapper>

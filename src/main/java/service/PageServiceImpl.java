@@ -24,4 +24,8 @@ public class PageServiceImpl implements PageService {
     public List<Map> getList(GetListBo bo) throws Exception {
         return mapper.getList(bo);
     }
+
+    public Integer getListCount(GetListBo bo) throws Exception {
+        return mapper.getListCount(bo);
+    }
 }

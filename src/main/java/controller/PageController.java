@@ -43,7 +43,8 @@ public class PageController  extends BaseController {
         BaseListVO<Map> listVo = new BaseListVO<Map>();
         List<Map> list = service.getList(bo);
         listVo.setData(list);
-        listVo.setCount(1000);
+        Integer count=service.getListCount(bo);
+        listVo.setCount(count);
         return listVo;
     }
 }
