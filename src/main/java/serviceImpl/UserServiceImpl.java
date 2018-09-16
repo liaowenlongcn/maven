@@ -1,4 +1,4 @@
-package service;
+package serviceImpl;
 
 import mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pojo.bo.UserBo;
 import pojo.bo.user.LoginBo;
 import pojo.vo.UserVo;
+import service.UserService;
 
 import java.util.List;
 
@@ -14,22 +15,22 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserMapper mapper;
 
     //用户登录
     public UserVo login(LoginBo loginBo) throws Exception {
-        return userMapper.login(loginBo);
+        return mapper.login(loginBo);
     }
 
     public List<UserVo> findList(UserBo userBo) throws Exception {
-        return userMapper.findList(userBo);
+        return mapper.findList(userBo);
     }
 
     public UserVo get(int id) throws Exception {
-        return userMapper.get(id);
+        return mapper.get(id);
     }
 
     public void update(int id, UserBo userBo) throws Exception {
-         userMapper.update(id,userBo);
+         mapper.update(id,userBo);
     }
 }
