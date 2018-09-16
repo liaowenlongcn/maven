@@ -16,7 +16,7 @@
             <td>性别：</td><td><input type="text" username="sex" value="${user.sex}"></td>
         </tr>
         <tr>
-            <td>年龄：</td><td><input type="text" username="age" value="${user.age}"></td>
+            <td>年龄：</td><td><input type="text" username="age" value="${user.age}">${id}</td>
         </tr>
         </tr>
         <tr>

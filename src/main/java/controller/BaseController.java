@@ -34,15 +34,16 @@ public class BaseController {
     }
 
     @RequestMapping("/page")
-    public ModelAndView Redirect(String viewName){
+    public ModelAndView Redirect(String viewName,String id){
         ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("id",id);
         modelAndView.setViewName(viewName);
         return modelAndView;
     }
 
     @RequestMapping("/main")
     public ModelAndView Redirect(){
-        return Redirect("home/index");
+        return Redirect("home/index","0");
     }
 
 }

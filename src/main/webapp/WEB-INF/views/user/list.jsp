@@ -23,8 +23,8 @@
 
 <div class="x-body">
     <xblock id="toolbar">
-        <button class="layui-btn" onclick="x_admin_show('添加用户','')"><i class="layui-icon">&#xe654;</i>新增</button>
-        <button class="layui-btn layui-btn-normal" onclick="x_admin_show('添加用户','')"><i class="layui-icon">&#xe642;</i>编辑
+        <button class="layui-btn" onclick="x_admin_show('新增','page?viewName=user/edit&id=10')"><i class="layui-icon">&#xe654;</i>新增</button>
+        <button class="layui-btn layui-btn-normal" onclick="x_admin_show('编辑','')"><i class="layui-icon">&#xe642;</i>编辑
         </button>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>删除</button>
         <span style="line-height:40px;float: right">
@@ -43,6 +43,10 @@
             api: "page/getColumns?pageid=1",
             callback_success: function (res) {
                 var clos = [];
+                clos.push({
+                    checkbox: true,
+                    fixed: true
+                });
                 $.each(res, function (i, item) {
                     var clo = {
                         field: item.name,
@@ -69,28 +73,6 @@
                 });
             }
         });
-
-        /*
-         var clos = [[
-         {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'},
-         {field: 'username', title: '用户名', sort: true},
-         {field: 'password', title: '密码'},
-         {field: 'sex', title: '性别', sort: true ,templet: function(rowItem){
-         return rowItem.sex? "男":"女";
-         }},
-         {field: 'img', title: '头像', sort: true},
-         ]];
-
-         layui.use('table', function () {
-         var table = layui.table;
-         table.render({
-         elem: '#tb',
-         url: 'page/getList',
-         page: true,
-         cols: clos
-         });
-         });
-         */
     });
 
 
