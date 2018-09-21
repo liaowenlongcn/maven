@@ -8,7 +8,7 @@
     </select>
 
     <select id="getList" parameterType="pojo.bo.GetListBo" resultType="java.util.Map">
-        SELECT GROUP_CONCAT(NAME) INTO @FIELDS FROM (SELECT 'field' FIELDS, NAME FROM page_field) temp GROUP BY FIELDS;
+        SELECT GROUP_CONCAT(CODE) INTO @FIELDS FROM (SELECT 'field' FIELDS, CODE FROM page_field) temp GROUP BY FIELDS;
         SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user limit ',(#{page}-1)*#{limit},',',#{limit} );
         PREPARE strSql FROM @SQL;
         EXECUTE strSql;
@@ -17,6 +17,26 @@
 
     <select id="getListCount" parameterType="pojo.bo.GetListBo" resultType="Integer">
         select count(*) from  sys_user
+    </select>
+
+    <!-- actionType:1-list,2-add,3-edit,4-def -->
+    <select id="getColumsByAction" parameterType="pojo.bo.page.GetColumsByActionBo" resultType="java.util.Map">
+        <choose>
+            <when test="actionType==1">
+
+            </when>
+            <when test="actionType==2">
+
+            </when>
+            <when test="actionType==3">
+                SELECT CODE,DISPLAYNAME,CONTROLTYPE,ISREQUIRED,MESSAGE FROM PAGE_FIELD
+                WHERE PAGEID=#{pageId} AND ISDELETE=0 AND ISEDIT=1
+            </when>
+            <when test="actionType==4">
+
+            </when>
+        </choose>
+        ORDER BY SORT ASC
     </select>
 
 </mapper>

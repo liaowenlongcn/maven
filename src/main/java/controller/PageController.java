@@ -3,15 +3,18 @@ package controller;
 import commn.ObjectHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.bo.GetListBo;
+import pojo.bo.page.GetColumsByActionBo;
 import pojo.request.GetListRequest;
+import pojo.request.page.GetColumsByActionRequest;
 import pojo.response.CommonRespnse;
 import pojo.vo.BaseListVO;
 import service.PageService;
 
-import javax.security.auth.callback.Callback;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +27,17 @@ public class PageController  extends BaseController {
 
     @Autowired
     private PageService service;
+
+    //查询字段信息
+    @RequestMapping(value = "/getColumsByAction", method = {RequestMethod.POST})
+    @ResponseBody
+    public CommonRespnse<List<Map>> getColumsByAction(@RequestBody GetColumsByActionRequest request) throws Exception {
+        GetColumsByActionBo bo=new GetColumsByActionBo();
+        ObjectHelper.toBean(request, bo);
+        List<Map> list = service.getColumsByAction(bo);
+        return CallBack(list);
+    }
+
 
     //查询列
     @RequestMapping("/getColumns")

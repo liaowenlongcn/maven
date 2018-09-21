@@ -14,7 +14,8 @@ function Ajax(params) {
     var req = $.ajax({
         type: method,
         url:api,
-        data: data,
+        data: JSON.stringify(data),
+        contentType:"application/json",
         dataType: 'json',
         timeout: 600000,
         beforeSend: function (request) {

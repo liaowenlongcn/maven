@@ -4,6 +4,7 @@ import mapper.PageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.bo.GetListBo;
+import pojo.bo.page.GetColumsByActionBo;
 import service.PageService;
 
 import java.util.List;
@@ -28,5 +29,9 @@ public class PageServiceImpl implements PageService {
 
     public Integer getListCount(GetListBo bo) throws Exception {
         return mapper.getListCount(bo);
+    }
+
+    public List<Map> getColumsByAction(GetColumsByActionBo bo) throws Exception{
+        return mapper.getColumsByAction(bo);
     }
 }

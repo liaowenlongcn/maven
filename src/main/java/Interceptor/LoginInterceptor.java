@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
        }
 
        HttpSession httpSession=httpServletRequest.getSession();
-       String username=(String) httpSession.getAttribute("usernamr");
+       String username=(String) httpSession.getAttribute("username");
        if(username!=null){
            return  true;
        }

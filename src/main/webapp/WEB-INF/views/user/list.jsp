@@ -49,7 +49,7 @@
                 });
                 $.each(res, function (i, item) {
                     var clo = {
-                        field: item.name,
+                        field: item.code,
                         title: item.displayName
                     };
                     if (item.hasOwnProperty("width")) clo.width = item.width;

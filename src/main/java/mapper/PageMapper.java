@@ -1,6 +1,7 @@
 package mapper;
 
 import pojo.bo.GetListBo;
+import pojo.bo.page.GetColumsByActionBo;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +16,6 @@ public interface PageMapper {
     public List<Map> getList(GetListBo bo) throws Exception;
 
     public Integer getListCount(GetListBo bo) throws Exception;
+
+    public List<Map> getColumsByAction(GetColumsByActionBo bo) throws Exception;
 }
