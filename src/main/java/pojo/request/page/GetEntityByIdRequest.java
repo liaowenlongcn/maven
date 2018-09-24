@@ -4,13 +4,13 @@ import lombok.Data;
 import pojo.enums.ActionType;
 
 /**
- * Created by wenlong.liao on 2018/9/20.
+ * Created by wenlong.liao on 2018/9/24.
  */
 @Data
-public class GetColumsByActionRequest {
+public class GetEntityByIdRequest {
 
     public String pageId;
 
-    public ActionType actionType;
+    public String itemId;
 
 }

@@ -127,7 +127,7 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='page?viewName=user/list' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe id="iframe" src='page?viewName=user/list' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
     </div>

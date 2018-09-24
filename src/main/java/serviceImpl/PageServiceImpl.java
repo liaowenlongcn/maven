@@ -3,8 +3,11 @@ package serviceImpl;
 import mapper.PageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.bean.page.Page;
 import pojo.bo.GetListBo;
+import pojo.bo.page.EntityInfoBo;
 import pojo.bo.page.GetColumsByActionBo;
+import pojo.bo.page.InsertValueBo;
 import service.PageService;
 
 import java.util.List;
@@ -33,5 +36,17 @@ public class PageServiceImpl implements PageService {
 
     public List<Map> getColumsByAction(GetColumsByActionBo bo) throws Exception{
         return mapper.getColumsByAction(bo);
+    }
+
+    public Integer saveValues(InsertValueBo bo) throws Exception{
+        return  mapper.saveValues(bo);
+    }
+
+    public Page getPageById(String id) throws Exception{
+        return  mapper.getPageById(id);
+    }
+
+    public Map getEntityById(EntityInfoBo bo) throws Exception{
+        return  mapper.getEntityById(bo);
     }
 }

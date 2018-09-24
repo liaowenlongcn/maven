@@ -23,8 +23,11 @@
 
 <div class="x-body">
     <xblock id="toolbar">
-        <button class="layui-btn" onclick="x_admin_show('新增','page?viewName=user/edit&id=10')"><i class="layui-icon">&#xe654;</i>新增</button>
-        <button class="layui-btn layui-btn-normal" onclick="x_admin_show('编辑','')"><i class="layui-icon">&#xe642;</i>编辑
+        <button class="layui-btn" onclick="x_admin_show('新增','page?viewName=user/edit&actionType=1')"><i
+                class="layui-icon">&#xe654;</i>新增
+        </button>
+        <button class="layui-btn layui-btn-normal" onclick="openDialog('编辑','page?viewName=user/edit&actionType=2')"><i
+                class="layui-icon">&#xe642;</i>编辑
         </button>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>删除</button>
         <span style="line-height:40px;float: right">
@@ -57,7 +60,7 @@
                     if (item.hasOwnProperty("fixed")) clo.fixed = item.fixed;
                     if (item.hasOwnProperty("templet")) {
                         //clo.templet = item.templet;
-                        var fun = "window.fun="+item.templet;
+                        var fun = "window.fun=" + item.templet;
                         clo.templet = eval(fun);
                     }
                     clos.push(clo);
@@ -75,6 +78,16 @@
         });
     });
 
+    function openDialog(title, url, w, h) {
+        var checkStatus = layui.table.checkStatus('tb');
+        var length = checkStatus.data.length;
+        if (length != 1) {
+            layer.alert("请选择一条记录");
+            return false;
+        }
+        url += "&itemId=" + checkStatus.data[0]["id"];
+        x_admin_show(title, url, w, h);
+    }
 
     /*用户-停用*/
     function member_stop(obj, id) {

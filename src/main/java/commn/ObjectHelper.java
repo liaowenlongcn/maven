@@ -2,6 +2,8 @@ package commn;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by wenlong.liao on 2018/9/1.
@@ -25,6 +27,13 @@ public class ObjectHelper {
         }
     }
 
+    public static String getDatetime(){
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return  dateFormat.format(now);
+    }
+
+
     private Object invokeGetMethod(Object filterBean, String fieldName, Object[] args) {
         String methodName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
         Method method = null;
@@ -32,7 +41,7 @@ public class ObjectHelper {
             method = Class.forName(filterBean.getClass().getName()).getDeclaredMethod("get" + methodName);
             return method.invoke(filterBean);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return "";
         }
     }
@@ -51,7 +60,7 @@ public class ObjectHelper {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+           // e.printStackTrace();
             return "";
         }
     }

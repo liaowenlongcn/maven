@@ -27,42 +27,28 @@
 
 <script>
     $(function () {
-        Ajax({
-            api: "page/getColumsByAction",
-            data: {"pageId": "1", "actionType": 3},
-            callback_success: function (res) {
-                $.each(res, function (i, item) {
-                    createField(item);
-                });
+        var actionType = getUrlParam("actionType");
+        var itemData = null;
 
-                createButton();
+        if (actionType == 2) {
+            Ajax({
+                api: "page/getEntityById",
+                data: {"pageId": "1", "itemId": getUrlParam("itemId")},
+                callback_success: function (data) {
+                    itemData = data;
+                    createIdInput(itemData);
+                    bindFields(actionType, itemData);
+                }
+            });
 
-                layui.use(['form', 'layer'], function () {
-                    var form = layui.form;
-                    var layer = layui.layer;
-                    form.render();
-
-                    //监听提交
-                    form.on('submit(add)', function (data) {
-                        //发异步，把数据提交给php
-                        layer.alert("增加成功", {icon: 6}, function () {
-                            // 获得frame索引
-                            var index = parent.layer.getFrameIndex(window.name);
-                            //关闭当前frame
-                            parent.layer.close(index);
-                        });
-                        return false;
-                    });
-                });
-            }
-        });
-
-        //createField();
-
+        }
+        else {
+            bindFields(actionType, itemData);
+        }
     });
 
 
-    function createField(item) {
+    function createField(item, itemData) {
         var item_div = document.createElement("div");
         item_div.setAttribute("class", "layui-form-item");
 
@@ -88,6 +74,9 @@
         inputElement.setAttribute("name", item.CODE);
         if (item.ISREQUIRED) {
             inputElement.setAttribute("lay-verify", "required");
+        }
+        if (itemData != null && itemData.hasOwnProperty(item.CODE)) {
+            inputElement.setAttribute("value", itemData[item.CODE]);
         }
         inputElement.setAttribute("autocomplete", "off");
         inputElement.setAttribute("class", "layui-input");
@@ -125,6 +114,56 @@
         $(".layui-form").append(item_div);
     }
 
+    function createIdInput(itemData) {
+        var code = "id";
+        var inputElement = document.createElement("input");
+        inputElement.setAttribute("type", "hidden");
+        inputElement.setAttribute("id", code);
+        inputElement.setAttribute("name", code);
+        inputElement.setAttribute("value", itemData[code]);
+        $(".layui-form").append(inputElement);
+    }
+
+    function bindFields(actionType, itemData) {
+        Ajax({
+            api: "page/getColumsByAction",
+            data: {"pageId": "1", "actionType": actionType},
+            callback_success: function (res) {
+                $.each(res, function (i, item) {
+                    createField(item, itemData);
+                });
+                createButton();
+
+                layui.use(['form', 'layer'], function () {
+                    var form = layui.form;
+                    var layer = layui.layer;
+                    form.render();
+
+                    //监听提交
+                    form.on('submit(add)', function (data) {
+                        //发异步，把数据提交给php
+                        Ajax({
+                            api: "page/saveBaseForm",
+                            data: {"pageId": 1, "keyValue": data.field},
+                            callback_success: function (res) {
+                                if (res > 0) {
+                                    layer.alert("保存成功", {icon: 6}, function () {
+                                        var index = parent.layer.getFrameIndex(window.name); // 获得frame索引
+                                        parent.layui.table.reload('tb', {page: {curr: 1}});
+                                        parent.layer.close(index); //关闭当前frame
+                                    });
+                                }
+                                else {
+                                    layer.alert("保存失败");
+                                }
+                            }
+                        });
+                        return false;
+                    });
+                });
+            }
+        });
+    }
 
 </script>
 

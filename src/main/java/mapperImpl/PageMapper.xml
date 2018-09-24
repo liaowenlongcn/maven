@@ -9,7 +9,7 @@
 
     <select id="getList" parameterType="pojo.bo.GetListBo" resultType="java.util.Map">
         SELECT GROUP_CONCAT(CODE) INTO @FIELDS FROM (SELECT 'field' FIELDS, CODE FROM page_field) temp GROUP BY FIELDS;
-        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user limit ',(#{page}-1)*#{limit},',',#{limit} );
+        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user order by createtime desc limit ',(#{page}-1)*#{limit},',',#{limit} );
         PREPARE strSql FROM @SQL;
         EXECUTE strSql;
         DEALLOCATE PREPARE strSql;
@@ -22,21 +22,49 @@
     <!-- actionType:1-list,2-add,3-edit,4-def -->
     <select id="getColumsByAction" parameterType="pojo.bo.page.GetColumsByActionBo" resultType="java.util.Map">
         <choose>
+            <when test="actionType==0">
+            </when>
             <when test="actionType==1">
-
+                SELECT CODE,DISPLAYNAME,CONTROLTYPE,ISREQUIRED,MESSAGE FROM PAGE_FIELD
+                WHERE PAGEID=#{pageId} AND ISDELETE=0 AND ISAdd=1
             </when>
             <when test="actionType==2">
-
-            </when>
-            <when test="actionType==3">
                 SELECT CODE,DISPLAYNAME,CONTROLTYPE,ISREQUIRED,MESSAGE FROM PAGE_FIELD
                 WHERE PAGEID=#{pageId} AND ISDELETE=0 AND ISEDIT=1
             </when>
-            <when test="actionType==4">
+            <when test="actionType==3">
 
             </when>
         </choose>
         ORDER BY SORT ASC
     </select>
 
+    <insert id="saveValues" parameterType="pojo.bo.page.InsertValueBo">
+        <if test="keyValue.containsKey('id')">
+            UPDATE ${tableName} SET
+            <foreach collection="keyValue" index="key" item="value" open="" close="" separator=",">
+                ${key}=#{value}
+            </foreach>
+            WHERE  id=#{keyValue.id}
+        </if>
+
+        <if test="!keyValue.containsKey('id')">
+            insert ignore into ${tableName}
+            <foreach collection="keyValue.keys" item="key" open="(" close=")" separator=",">
+                ${key}
+            </foreach>
+            values
+            <foreach collection="keyValue" item="value" open="(" close=")" separator=",">
+                #{value}
+            </foreach>
+        </if>
+    </insert>
+
+    <select id="getPageById" parameterType="java.lang.String" resultType="pojo.bean.page.Page">
+        SELECT * FROM  page_page WHERE id=#{id}
+    </select>
+
+    <select id="getEntityById" parameterType="pojo.bo.page.EntityInfoBo" resultType="java.util.Map">
+        SELECT * FROM  ${tableName} WHERE id=#{id}
+    </select>
 </mapper>
