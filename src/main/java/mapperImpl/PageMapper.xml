@@ -9,14 +9,14 @@
 
     <select id="getList" parameterType="pojo.bo.GetListBo" resultType="java.util.Map">
         SELECT GROUP_CONCAT(CODE) INTO @FIELDS FROM (SELECT 'field' FIELDS, CODE FROM page_field) temp GROUP BY FIELDS;
-        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user order by createtime desc limit ',(#{page}-1)*#{limit},',',#{limit} );
+        SET @SQL = CONCAT('select ', @FIELDS, ' from sys_user where isdelete=0 order by createtime desc limit ',(#{page}-1)*#{limit},',',#{limit} );
         PREPARE strSql FROM @SQL;
         EXECUTE strSql;
         DEALLOCATE PREPARE strSql;
     </select>
 
     <select id="getListCount" parameterType="pojo.bo.GetListBo" resultType="Integer">
-        select count(*) from  sys_user
+        select count(*) from  sys_user where isdelete=0
     </select>
 
     <!-- actionType:1-list,2-add,3-edit,4-def -->
@@ -67,4 +67,12 @@
     <select id="getEntityById" parameterType="pojo.bo.page.EntityInfoBo" resultType="java.util.Map">
         SELECT * FROM  ${tableName} WHERE id=#{id}
     </select>
+
+    <update id="delete" parameterType="pojo.bo.page.DeleteBo">
+        UPDATE ${tableName} SET ISDELETE=1 WHERE id IN
+        <foreach collection="ids" index="key" item="value" open="(" close=")" separator=",">
+            ${value}
+        </foreach>
+    </update>
+
 </mapper>

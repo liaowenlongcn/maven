@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.bean.page.Page;
 import pojo.bo.GetListBo;
+import pojo.bo.page.DeleteBo;
 import pojo.bo.page.EntityInfoBo;
 import pojo.bo.page.GetColumsByActionBo;
 import pojo.bo.page.InsertValueBo;
@@ -48,5 +49,9 @@ public class PageServiceImpl implements PageService {
 
     public Map getEntityById(EntityInfoBo bo) throws Exception{
         return  mapper.getEntityById(bo);
+    }
+
+    public Integer delete(DeleteBo bo) throws Exception{
+        return  mapper.delete(bo);
     }
 }

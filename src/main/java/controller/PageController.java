@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pojo.bo.GetListBo;
+import pojo.bo.page.DeleteBo;
 import pojo.bo.page.EntityInfoBo;
 import pojo.bo.page.GetColumsByActionBo;
 import pojo.bo.page.InsertValueBo;
 import pojo.enums.ActionType;
 import pojo.request.GetListRequest;
+import pojo.request.page.DeleteItemRequest;
 import pojo.request.page.GetColumsByActionRequest;
 import pojo.request.page.GetEntityByIdRequest;
 import pojo.request.page.SaveBaseFormRequest;
@@ -80,6 +82,17 @@ public class PageController extends BaseController {
         return CallBack(count);
     }
 
+    //删除记录
+    @RequestMapping(value = "/deleteItems", method = {RequestMethod.POST})
+    @ResponseBody
+    public CommonRespnse<Integer> deleteItems(@RequestBody DeleteItemRequest request) throws Exception {
+        DeleteBo bo = new DeleteBo();
+        ObjectHelper.toBean(request, bo);
+        String tableName = service.getPageById(request.pageId).tableName;
+        bo.tableName = tableName;
+        Integer count = service.delete(bo);
+        return CallBack(count);
+    }
 
     //查询列
     @RequestMapping("/getColumns")

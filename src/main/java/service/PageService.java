@@ -2,6 +2,7 @@ package service;
 
 import pojo.bean.page.Page;
 import pojo.bo.GetListBo;
+import pojo.bo.page.DeleteBo;
 import pojo.bo.page.EntityInfoBo;
 import pojo.bo.page.GetColumsByActionBo;
 import pojo.bo.page.InsertValueBo;
@@ -27,4 +28,6 @@ public interface PageService {
     public Page getPageById(String id) throws Exception;
 
     public Map getEntityById(EntityInfoBo bo) throws Exception;
+
+    public Integer delete(DeleteBo bo) throws Exception;
 }

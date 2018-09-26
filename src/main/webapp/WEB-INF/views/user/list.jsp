@@ -29,7 +29,7 @@
         <button class="layui-btn layui-btn-normal" onclick="openDialog('编辑','page?viewName=user/edit&actionType=2')"><i
                 class="layui-icon">&#xe642;</i>编辑
         </button>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>删除</button>
+        <button class="layui-btn layui-btn-danger" onclick="deletes()"><i class="layui-icon"></i>删除</button>
         <span style="line-height:40px;float: right">
         <form class="layui-form layui-col-md12 x-so">
             <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
@@ -89,48 +89,33 @@
         x_admin_show(title, url, w, h);
     }
 
-    /*用户-停用*/
-    function member_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
 
-            if ($(obj).attr('title') == '启用') {
+    function deletes() {
+        var checkStatus = layui.table.checkStatus('tb');
+        var length = checkStatus.data.length;
+        if (length < 1) {
+            layer.alert("请选择至少一条记录");
+            return false;
+        }
 
-                //发异步把用户状态进行更改
-                $(obj).attr('title', '停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!', {icon: 5, time: 1000});
-
-            } else {
-                $(obj).attr('title', '启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!', {icon: 5, time: 1000});
-            }
-
+        var ids = new Array();
+        $.each(checkStatus.data, function (index, value) {
+            ids.push(value["id"]);
         });
-    }
 
-    /*用户-删除*/
-    function member_del(obj, id) {
-        layer.confirm('确认要删除吗？', function (index) {
-            //发异步删除数据
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {icon: 1, time: 1000});
-        });
-    }
-
-
-    function delAll(argument) {
-
-        var data = tableCheck.getData();
-
-        layer.confirm('确认要删除吗？' + data, function (index) {
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
+        layer.confirm('确认删除？', function (index) {
+            Ajax({
+                api: "page/deleteItems",
+                data: {"pageId": "1", "ids": ids},
+                callback_success: function (res) {
+                    if (res > 0) {
+                        layui.table.reload('tb', {page: {curr: 1}});
+                        layer.msg('删除成功', {icon: 1});
+                    } else {
+                        layer.alert("删除失败");
+                    }
+                }
+            });
         });
     }
 </script>
